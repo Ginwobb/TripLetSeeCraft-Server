@@ -1,0 +1,20 @@
+const express = require('express')
+const adminRoute = express.Router()
+const adminController = require('../controllers/admin-controller')
+const upload = require('../middlewares/upload')
+
+adminRoute.get('/users',adminController.getAllUsers)
+adminRoute.get('/users/count',adminController.countUser)
+adminRoute.put('/users/:userId',adminController.updateUser)
+adminRoute.delete('/users/:userId',adminController.deleteUser)
+adminRoute.get('/trips',adminController.getAllTrips)
+adminRoute.get('/trips/count',adminController.countTrip)
+adminRoute.get('/categories',adminController.getAllCategories)
+adminRoute.get('/destinations',adminController.getAllDestinations)
+adminRoute.get('/places',adminController.getAllPlaces)
+adminRoute.get('/places/count',adminController.countPlace)
+adminRoute.post('/places',upload.single('placeImage'),adminController.createPlaces)
+adminRoute.put('/places/:placeId',upload.single('placeImage'),adminController.editPlaces)
+adminRoute.delete('/places/:placeId',adminController.deletePlaces)
+
+module.exports = adminRoute
